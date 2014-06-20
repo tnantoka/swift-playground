@@ -67,6 +67,16 @@ class TableViewController: UITableViewController {
         return cell
     }
 
+    func configureCell(cell: UITableViewCell!, atIndexPath indexPath: NSIndexPath) {
+        let item = self.items[indexPath.row]
+        
+        cell.textLabel.text = item.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        cell.textLabel.numberOfLines = 0
+        
+        cell.detailTextLabel.text = item.link.absoluteString
+        cell.detailTextLabel.textColor = UIColor.lightGrayColor()
+    }
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView?, canEditRowAtIndexPath indexPath: NSIndexPath?) -> Bool {
@@ -118,16 +128,6 @@ class TableViewController: UITableViewController {
         let webViewController = SVWebViewController(URL: item.link)
         self.navigationController.pushViewController(webViewController, animated: true)
     }
-
-    func configureCell(cell: UITableViewCell!, atIndexPath indexPath: NSIndexPath) {
-        let item = self.items[indexPath.row]
-        
-        cell.textLabel.text = item.title.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-        cell.textLabel.numberOfLines = 0
-        
-        cell.detailTextLabel.text = item.link.absoluteString
-        cell.detailTextLabel.textColor = UIColor.lightGrayColor()
-    }
     
     func loadItems() {
         MBProgressHUD.showHUDAddedTo(self.navigationController.view, animated: true)
@@ -154,6 +154,5 @@ class TableViewController: UITableViewController {
                 MBProgressHUD.hideHUDForView(self.navigationController.view, animated: true)
             })
     }
-    
 
 }
